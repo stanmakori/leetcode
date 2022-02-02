@@ -1,0 +1,17 @@
+class NumbersAscending {
+    public boolean areNumbersAscending(String s) {
+        //extract the numbers from the string
+        int[] ints= Arrays.stream(s.split(" "))
+            .filter(c->c.matches("\\d+"))
+            .mapToInt(Integer::parseInt).toArray();
+        
+        //check if they are sorted
+        //int[] ints2=Arrays.toString(ints);
+        
+        for(int i=1;i<ints.length;i++)
+        {
+            if(ints[i-1]>=ints[i]) return false;
+        }
+        return true;
+    }
+}
