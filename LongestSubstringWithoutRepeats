@@ -1,0 +1,46 @@
+import java.util.*;
+
+//longest-substring-without-repeating-characters
+public class LongestSubStringWithoutRepeatingChars {
+
+ //method1: set
+    static int longestsubwithoutRepeat(String s)
+    {
+        Set<Character> set=new LinkedHashSet<>();
+        int maxlen=0;
+        int j=0;
+        int i=0;
+        String longest="";
+        String tempString="";
+        while(i<s.length())
+        {
+            if (set.add(s.charAt(i)))
+            {
+                i++;
+                maxlen=Math.max(maxlen, set.size());
+                tempString=s.substring(j,i);
+                longest=tempString.length()>longest.length()?tempString:longest;//get current longest substring
+            }
+            else
+            {
+                set.remove(s.charAt(j));
+                j++;
+            }
+        }
+        System.out.println(longest);
+        return maxlen;
+    }
+    //Methiod 2: Hashmap
+      HashMap<Character, Integer> hm = new HashMap<>();
+        int len = 0, left = 0, right = 0;
+        while( right < s.length() ){
+            if(hm.containsKey(s.charAt(right) ) )
+                // System.out.println(hm.get(s.charAt(right))+1);
+                left = Math.max( left, hm.get(s.charAt(right))+1  );
+            hm.put(s.charAt(right) , right);
+            len = Math.max(len, right-left+1);
+            right++;
+        }
+        return len;
+    
+    }
