@@ -1,0 +1,79 @@
+Given n arrays of size m each. Find the maximum sum obtained by selecting a number from each array such that the elements selected from the i-th array are more than the element selected from (i-1)-th array. If maximum sum cannot be obtained then return 0.
+Examples: 
+
+Input : arr[][] = {{1, 7, 3, 4},
+                   {4, 2, 5, 1},
+                   {9, 5, 1, 8}}
+Output : 18
+Explanation :
+We can select 4 from first array, 5 from 
+second array and 9 from third array.
+
+Input : arr[][] = {{9, 8, 7},
+                   {6, 5, 4},
+                   {3, 2, 1}}
+Output : 0
+
+==============Solution=================Can be improved
+import java.util.Arrays;
+
+public class MaxumIncreasing {
+    //find nearest greater
+    static int findNearestLessThan(int[] arr, int n)
+    {
+        int found=arr[0];
+        int max=0;
+        for(int x: arr)
+        {
+            if(x<=n-1)
+            {
+                max=Math.max(found,x);
+                found=x;
+            }
+        }
+        return max;
+    }
+    static int sumNearestAsc(int[][] arr)
+    {
+        int[] arr1=arr[0];Arrays.sort(arr1);
+        int[] arr2=arr[1];Arrays.sort(arr2);
+        int[] arr3=arr[2];Arrays.sort(arr3);
+        int sum=0;
+
+        //find max for third array
+        int max1= arr3[arr3.length-1];
+
+        //find biggest element from array2 that is less than max1
+        int max2= findNearestLessThan(arr2, max1);
+
+        //find biggest element from array3 that is less than max2
+
+        int max3= findNearestLessThan(arr1, max2);
+
+        if(max2==0 || max3==0)
+        {
+            sum=0;
+        }
+        else
+        {
+            sum=max1+max2+max3;
+        }
+        return sum;
+
+    }
+    public static void main(String[] args)
+    {
+        //case 1
+        int[][] arr={{1, 7, 3, 4},
+                {4, 2, 5, 1},
+                {9, 5, 1, 8}};
+        System.out.println(sumNearestAsc(arr));
+
+        //case 2
+        int arr1[][] = {{9, 8, 7},
+                {6, 5, 4},
+                {3, 2, 1}};
+        System.out.println(sumNearestAsc(arr1));
+
+    }
+}
