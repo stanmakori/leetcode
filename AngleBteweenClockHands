@@ -1,0 +1,16 @@
+public double angleClock(int hour, int minutes) {
+double hourAngle = 0.5 * (60 * hour + minutes);
+            double minuteAngle = minutes * 6;
+            double angleBewteen = Math.abs(hourAngle - minuteAngle);//prevent negative angles
+            double result = 0.00;
+            if (angleBewteen > 180.00) {
+                result = 360 - angleBewteen;
+
+            } else {
+                result = angleBewteen;
+            }
+            System.out.println(angleBewteen);
+            return result;
+    
+    }
+};
