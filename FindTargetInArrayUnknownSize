@@ -1,0 +1,17 @@
+class Solution {
+    public int search(ArrayReader reader, int target) {
+        
+        int len=Integer.MAX_VALUE;
+       return binarySearchRecursive(reader,target, 0,len);
+        
+    }
+        static int binarySearchRecursive(ArrayReader reader , int target, int left, int right)
+    {
+
+        if(left >right) return -1;
+        int mid=left+(right-left)/2;
+        if(reader.get(mid)==target) return mid;
+        else if(target>reader.get(mid)) return binarySearchRecursive(reader,target,mid+1,right);
+        else return binarySearchRecursive(reader,target,left,mid-1);
+    }
+}
